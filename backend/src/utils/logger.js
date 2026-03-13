@@ -1,0 +1,29 @@
+import winston from "winston";
+
+const logger = winston.createLogger({
+  level: process.env.NODE_ENV === "production" ? "info" : "debug",
+  format: winston.format.combine(
+    winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    winston.format.errors({ stack: true }),
+    //splat is used to format messages with parameters
+    winston.format.splat(),
+    winston.format.json(),
+  ),
+  defaultMeta: { service: "hunger-food-delivery-api" },
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple(),
+      ),
+    }),
+    //creating error log file and combined log file for all logs using transports
+    new winston.transports.File({
+      filename: "src/logs/error.log",
+      level: "error",
+    }),
+    new winston.transports.File({ filename: "src/logs/combined.log" }),
+  ],
+});
+
+export default logger;
