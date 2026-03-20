@@ -8,7 +8,7 @@ const require = createRequire(import.meta.url);
 const swaggerDocument = require("../swagger-output.json");
 
 import logger from "./utils/logger.js";
-import corsConfiguration from "./utils/corsConfig.js";
+import corsConfiguration from "./utils/cors.config.js";
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(corsConfiguration);
 const morganStream = {
   write: (message) => {
     logger.info(message.trim());
-  },
+  }
 };
 // HTTP request logging
 app.use(morgan("combined", { stream: morganStream }));
@@ -30,7 +30,7 @@ app.use(morgan("combined", { stream: morganStream }));
 // Importing routes
 import userRoutes from "./routes/user.Route.js";
 
-// routes declaration
+// routes declaration 
 app.use("/api/v1/users", userRoutes);
 
 // Swagger UI setup

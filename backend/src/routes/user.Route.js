@@ -1,15 +1,17 @@
 import express from "express";
+import { loginUser, registerUser } from "../controllers/userAuthControllers.js";
+
 
 const router = express.Router();
 
 /*  #swagger.tags = ['Users']
-    #swagger.summary = 'Get all users'
+    #swagger.summary = 'Register a new user'
 */
-router.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: ["User1", "User2"],
-  });
-});
+router.post("/register", registerUser);
+
+/*  #swagger.tags = ['Users']
+    #swagger.summary = 'Login user'
+*/
+router.post("/login", loginUser);
 
 export default router;

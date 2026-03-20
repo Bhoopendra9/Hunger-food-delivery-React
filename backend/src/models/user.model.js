@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "owner", "delivertBoy", "admin"],
+      enum: ["user", "owner", "deliveryBoy", "admin"],
       required: true,
     },
   },
@@ -45,16 +45,16 @@ userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
       _id: this._id,
+      fullName: this.fullName,
       email: this.email,
-      username: this.username,
+      role: this.role,
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: process.env.ACCESS_TOKEN_LIFE,
-    }
+    },
   );
 };
-
 
 const User = mongoose.model("User", userSchema);
 
