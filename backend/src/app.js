@@ -8,7 +8,7 @@ const require = createRequire(import.meta.url);
 const swaggerDocument = require("../swagger-output.json");
 
 import logger from "./utils/logger.js";
-import corsConfiguration from ",/utils/corsConfig.js";
+import corsConfiguration from "./utils/corsConfig.js";
 
 const app = express();
 
