@@ -9,6 +9,7 @@ import {
 
 //Register a new user
 export const registerUser = async (req, res) => {
+  return res.status(200).json(new ApiResponse(200, "User registered successfully", []));
   //TODO: Add otp verification for email and mobile number
   logger.info("Registering a new user with data: " + JSON.stringify(req.body));
   try {
@@ -122,5 +123,7 @@ export const loginUser = async (req, res) => {
 //Logout user
 export const logoutUser = async (req, res) => {
   try {
-  } catch (error) {}
+  } catch (error) {
+
+  }
 };

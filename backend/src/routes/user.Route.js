@@ -8,6 +8,10 @@ const router = express.Router();
     #swagger.summary = 'Register a new user'
 */
 router.post("/register", registerUser);
+router.get("/test", (req, res) => {
+  res.status(200).json({ message: "User route is working" });
+});
+
 
 /*  #swagger.tags = ['Users']
     #swagger.summary = 'Login user'
